@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Combine multiple PDF files into one with our free online PDF merger. Arrange pages, optimize PDFs, and download instantly.">
+    <meta name="keywords" content="PDF merger, combine PDF, PDF tool, optimize PDF, arrange PDF pages">
+    <meta name="author" content="Your Company Name">
+    <title>PDF Merger - Combine and Optimize PDF Files</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #4a90e2;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2rem;
+        }
+
+        .header-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Upload Section */
+        #upload-section {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .upload-box {
+            border: 2px dashed #4a90e2;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .upload-box:hover {
+            background-color: #f0f4ff;
+        }
+
+        .upload-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+        }
+
+        .upload-label {
+            font-size: 1.1rem;
+            color: #4a90e2;
+            cursor: pointer;
+        }
+
+        .upload-hint {
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 10px;
+        }
+
+        #pdf-upload {
+            display: none;
+        }
+
+        /* Merge Button */
+        .merge-button {
+            background-color: #4a90e2;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .merge-button:hover {
+            background-color: #357abd;
+        }
+
+        /* Page Arrangement Section */
+        #page-arrangement {
+            margin-bottom: 30px;
+        }
+
+        #page-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .page-thumbnail {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Download Button */
+        .download-button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .download-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .download-button:hover:not(:disabled) {
+            background-color: #218838;
+        }
+
+        /* Ad Section */
+        #ad-section {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_CLIENT_ID" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>PDF Merger Tool</h1>
+            <p>Combine, arrange, and optimize your PDF files in seconds.</p>
+        </div>
+        <img src="pdf-icon.png" alt="PDF Icon" class="header-icon">
+    </header>
+
+    <main>
+        <section id="upload-section">
+            <div class="upload-box">
+                <img src="upload-icon.png" alt="Upload Icon" class="upload-icon">
+                <input type="file" id="pdf-upload" accept="application/pdf" multiple>
+                <label for="pdf-upload" class="upload-label">Choose PDF Files</label>
+                <p class="upload-hint">Drag and drop files here or click to upload.</p>
+            </div>
+            <button id="merge-btn" class="merge-button">Merge PDFs</button>
+        </section>
+
+        <section id="page-arrangement">
+            <h2>Arrange Pages</h2>
+            <div id="page-preview"></div>
+        </section>
+
+        <section id="ad-section">
+            <!-- Google AdSense Ad Unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="YOUR_ADSENSE_CLIENT_ID"
+                 data-ad-slot="YOUR_AD_UNIT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </section>
+
+        <section id="download-section">
+            <button id="download-btn" class="download-button" disabled>Download Merged PDF</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Your Company Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('pdf-upload').addEventListener('change', handleFileUpload);
+        document.getElementById('merge-btn').addEventListener('click', mergePDFs);
+        document.getElementById('download-btn').addEventListener('click', downloadMergedPDF);
+
+        let pdfFiles = [];
+        let mergedPdf = null;
+
+        async function handleFileUpload(event) {
+            const files = event.target.files;
+            for (let file of files) {
+                pdfFiles.push(file);
+            }
+            renderPagePreviews();
+        }
+
+        function renderPagePreviews() {
+            const previewContainer = document.getElementById('page-preview');
+            previewContainer.innerHTML = '';
+            pdfFiles.forEach((file, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = 'page-thumbnail';
+                thumbnail.textContent = `PDF ${index + 1}`;
+                previewContainer.appendChild(thumbnail);
+            });
+        }
+
+        async function mergePDFs() {
+            const { PDFDocument } = PDFLib;
+            const mergedPdfDoc = await PDFDocument.create();
+
+            for (let file of pdfFiles) {
+                const pdfBytes = await file.arrayBuffer();
+                const pdfDoc = await PDFDocument.load(pdfBytes);
+                const copiedPages = await mergedPdfDoc.copyPages(pdfDoc, pdfDoc.getPageIndices());
+                copiedPages.forEach(page => mergedPdfDoc.addPage(page));
+            }
+
+            const mergedPdfBytes = await mergedPdfDoc.save();
+            mergedPdf = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+
+            document.getElementById('download-btn').disabled = false;
+        }
+
+        function downloadMergedPDF() {
+            const url = URL.createObjectURL(mergedPdf);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'merged.pdf';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+</body>
+</html>
